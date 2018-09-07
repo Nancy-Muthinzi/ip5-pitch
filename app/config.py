@@ -1,6 +1,6 @@
 class Config:
     '''
-    General configuration parent class
+    General configuration parent class - this is where configurations that are common across all encironments are
     '''
     pass
 
@@ -25,3 +25,8 @@ class DevConfig(Config):
     '''
 
     DEBUG = True
+
+#     app_config = {
+#     'development': DevelopmentConfig,
+#     'production': ProductionConfig
+# }

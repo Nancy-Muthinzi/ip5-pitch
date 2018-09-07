@@ -16,7 +16,7 @@ def index():
 def pitchi(pitch_id):
 
     '''
-    View movie page function that returns the movie details page and its data
+    View pitch page function that returns the pitch details page and its data
     '''
     return render_template('pitch.html',id = pitch_id)
     
