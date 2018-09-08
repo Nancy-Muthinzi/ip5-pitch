@@ -1,21 +1,21 @@
-{% extends 'base.html'%}
-<!-- {% import 'macros.html' as macro%} -->
+{% extends 'base.html' %}
 
-<!-- <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title>Pitches Pitches Pitches!!!</title>
-        {% endif %}
-    </head> -->
-    <body>
-        <h1>{{title}}</h1>
+<!-- Styles block -->
 
-        <h2>Pitches Categories</h2>
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
 
-    </body>
-</html>
+<!-- Content block -->
 
+{% block content %}
+    
+<body>
+
+<h1>PITCHES</h1>
+<h2>Categories</h2>
+
+</body>
+
+{% endblock %}

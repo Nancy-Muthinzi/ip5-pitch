@@ -9,14 +9,14 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-    title='Welcome to Pitches!!!'
-    return render_template('index.html', title=title)
+    title = 'PITCH PERFECT!'
+    return render_template('index.html',title = title)
 
-@app.route('/pitch/<pitch_id>')
-def pitchi(pitch_id):
+
+@app.route('/pitch/<int:pitch_id>')
+def pitch(pitch_id):
 
     '''
     View pitch page function that returns the pitch details page and its data
     '''
-    return render_template('pitch.html',id = pitch_id)
-    
+    return render_template('pitch.html',id = pitch_id)    

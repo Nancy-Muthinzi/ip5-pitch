@@ -10,8 +10,9 @@ class PitchTest(unittest.TestCase):
 
 def setUp(self):
     '''
-    this will run before each test
+    this method will run before each test
     '''
+    self.new_pitch = Pitch(1234, 'Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time.-Thomas Edison')
 
 def test_instance(self):
     self.assertTrue(isinstance(self.new_pitch, Pitch)) 
