@@ -5,9 +5,7 @@ from .forms import LoginForm,RegistrationForm
 from .. import db
 from . import auth
 
-@auth.route('/login')
-def login():
-    return render_template('auth/login.html')@auth.route('/login',methods=['GET','POST'])
+@auth.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
@@ -20,7 +18,7 @@ def login():
 
     title = "watchlist login"
     return render_template('auth/login.html',login_form = login_form,title=title)
-
+    
 @auth.route('/register',methods = ["GET","POST"])
 def register():
     form = RegistrationForm()

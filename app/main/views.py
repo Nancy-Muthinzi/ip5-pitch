@@ -27,7 +27,7 @@ def pitch(pitch_id):
     View pitch page function that returns the pitch details page and its data
     '''
 
-    reviews = Review.get_reviews(pitch.id)
+    # reviews = Review.get_reviews(pitch.id)
     return render_template('pitch.html',id = pitch_id, reviews=reviews)    
 
 # @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
