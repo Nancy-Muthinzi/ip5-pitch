@@ -45,7 +45,6 @@ def pitch(pitch_id):
 #     title = f'{pitch.title} review'
 #     return render_template('new_review.html',title = title, review_form=form, pitch=pitch)
 
-
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
