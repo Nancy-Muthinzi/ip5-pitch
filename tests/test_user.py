@@ -1,5 +1,6 @@
 import unittest
 from app.models import User
+from app import db
 
 class UserModelTest(unittest.TestCase):
 
@@ -8,8 +9,16 @@ class UserModelTest(unittest.TestCase):
         method to run before every test
         '''
 
-        self.new_user = User(password = 'banana')
+        self.user_Nancy = User(username = 'Nancy', password = 'banana', email = 'kathinimuthinzi@gmail.com')
 
+    def tearDown(self):
+        Review.query.delete()
+        User.query.delete()
+
+    def test_save_review(self):
+        self.new_review.save_review()
+        self.assertTrue(len(Review.query.all())>0)
+            
     def test_password_setter(self):
         self.assertTrue(self.new_user.pass_secure is not None)
 
