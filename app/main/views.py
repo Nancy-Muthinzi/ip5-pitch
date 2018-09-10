@@ -1,8 +1,10 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for,abort
 from . import main
-# from .models import review
-# from .forms import ReviewForm
+from .forms import UpdateProfile, ReviewForm
 from flask_login import login_required
+# from ..models import Review
+from ..models import User
+from .. import db
 
 # Review = review.Review
 
@@ -24,7 +26,31 @@ def pitch(pitch_id):
     '''
     View pitch page function that returns the pitch details page and its data
     '''
-    return render_template('pitch.html',id = pitch_id)    
 
-# @login_required
+    reviews = Review.get_reviews(pitch.id)
+    return render_template('pitch.html',id = pitch_id, reviews=reviews)    
+
+# @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
 # def new_review(id):
+#     form = ReviewForm()
+#     pitch = get_pitch(id)
+
+#     if form.validate_on_submit():
+#         title = form.title.data
+#         review = form.review.data
+#         new_review = Review(pitch.id,review)
+#         new_review.save_review()
+#         return redirect(url_for('pitch',id = pitch.id ))
+
+#     title = f'{pitch.title} review'
+#     return render_template('new_review.html',title = title, review_form=form, pitch=pitch)
+
+
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
