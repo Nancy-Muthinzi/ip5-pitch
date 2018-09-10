@@ -1,12 +1,12 @@
 from flask import render_template
-from app import app
+from . import main
 # from .models import review
 # from .forms import ReviewForm
 
 # Review = review.Review
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
@@ -17,7 +17,7 @@ def index():
     return render_template('index.html',title = title)
 
 
-@app.route('/pitch/<int:pitch_id>')
+@main.route('/pitch/<int:pitch_id>')
 def pitch(pitch_id):
 
     '''
@@ -25,7 +25,7 @@ def pitch(pitch_id):
     '''
     return render_template('pitch.html',id = pitch_id)    
 
-# @app.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
+# @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
 # def new_review(id):
 #     form = ReviewForm()
 #     movie = get_pitch(id)
