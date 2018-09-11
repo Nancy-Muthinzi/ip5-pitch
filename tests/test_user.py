@@ -11,10 +11,9 @@ class UserModelTest(unittest.TestCase):
 
         self.new_user = User(password = 'banana')
 
-    def tearDown(self):
-        Review.query.delete()
-        User.query.delete()
-
+    # def tearDown(self):
+    #     Pitch.query.delete()
+    #     User.query.delete()
               
     def test_password_setter(self):
         self.assertTrue(self.new_user.pass_secure is not None)
