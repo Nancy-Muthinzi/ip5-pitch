@@ -6,8 +6,6 @@ from flask_login import login_required
 from ..models import Pitch, User
 from .. import db, photos
 
-# Pitch = pitch.Pitch
-
 # Views
 @main.route('/')
 def index():
@@ -19,7 +17,33 @@ def index():
     title = 'PITCH PERFECT!'
     return render_template('index.html',title = title)
 
+@main.route('/encouraging/pitch/')
+def encouraging():
+    '''
+    View root page function that returns the encouraging page and its data
+    '''
 
+    pitch = Pitch.query.filter_by(category='encouraging')
+    return render_template('encouraging.html',title = title, pitch = pitch)
+
+@main.route('/funny/pitch/')
+def funny():
+    '''
+    View root page function that returns the funny page and its data
+    '''
+
+    pitch = pitch.get_pitches()
+    return render_template('funny.html',title = title, pitch = pitch)
+
+@main.route('/life/pitch/')
+def life():
+    '''
+    View root page function that returns the life page and its data
+    '''
+
+    pitch = pitch.get_pitches()
+    return render_template('life.html',title = title, pitch = pitch)
+ 
 @main.route('/pitch/<int:pitch_id>', methods = ['GET','POST'])
 def pitch(pitch_id):
 
