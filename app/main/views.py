@@ -1,12 +1,12 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from .forms import UpdateProfile, ReviewForm
+from .forms import UpdateProfile
+# from .forms import PitchForm
 from flask_login import login_required
-# from ..models import Review
-from ..models import User
+from ..models import Pitch, User
 from .. import db, photos
 
-# Review = review.Review
+# Pitch = pitch.Pitch
 
 # Views
 @main.route('/')
@@ -27,23 +27,22 @@ def pitch(pitch_id):
     View pitch page function that returns the pitch details page and its data
     '''
 
-    # reviews = Review.get_reviews(pitch.id)
-    return render_template('pitch.html',id = pitch_id, reviews=reviews)    
+    return render_template('pitch.html',id = pitch_id, pitch = pitch)    
 
-# @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
-# def new_review(id):
-#     form = ReviewForm()
-#     pitch = get_pitch(id)
+@main.route('/pitch/pitch/new/<int:id>', methods = ['GET','POST'])
+def new_pitch(id):
+    form = PitchForm()
+    pitch = get_pitch(id)
 
-#     if form.validate_on_submit():
-#         title = form.title.data
-#         review = form.review.data
-#         new_review = Review(pitch.id,review)
-#         new_review.save_review()
-#         return redirect(url_for('pitch',id = pitch.id ))
+    if form.validate_on_submit():
+        title = form.title.data
+        pitch = form.pitch.data
+        new_pitch = Pitch(pitch.id,pitch)
+        new_pitch.save_pitch()
+        return redirect(url_for('pitch',id = pitch.id ))
 
-#     title = f'{pitch.title} review'
-#     return render_template('new_review.html',title = title, review_form=form, pitch=pitch)
+    title = f'{pitch.title} pitch'
+    return render_template('new_pitch.html',title = title, pitch_form=form, pitch=pitch)
 
 @main.route('/user/<uname>')
 def profile(uname):

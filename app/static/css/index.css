@@ -1,3 +1,8 @@
 * {
-    font-family: Dokdo;
+    font-family: 'Itim', cursive;
+}
+
+.jumbotron {
+    font-size: 25px;
+    text-align: center;
 }
