@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from .forms import UpdateProfile
+from .forms import UpdateProfile,PitchForm
 # from .forms import PitchForm
-from flask_login import login_required
+from flask_login import login_required,current_user
 from ..models import Pitch, User
 from .. import db, photos
 
@@ -15,34 +15,37 @@ def index():
     '''
 
     title = 'PITCH PERFECT!'
-    return render_template('index.html',title = title)
+    technology = Pitch.query.filter_by(category='technology')
+    funny = Pitch.query.filter_by(category='funny')
 
-@main.route('/encouraging/pitch/')
-def encouraging():
-    '''
-    View root page function that returns the encouraging page and its data
-    '''
+    return render_template('index.html',title = title,technology=technology,funny=funny)
 
-    pitch = Pitch.query.filter_by(category='encouraging')
-    return render_template('encouraging.html',title = title, pitch = pitch)
+# @main.route('/encouraging/pitch/')
+# def encouraging():
+#     '''
+#     View root page function that returns the encouraging page and its data
+#     '''
 
-@main.route('/funny/pitch/')
-def funny():
-    '''
-    View root page function that returns the funny page and its data
-    '''
+#     pitch = Pitch.query.filter_by(category='encouraging')
+#     return render_template('encouraging.html',title = title, pitch = pitch)
 
-    pitch = pitch.get_pitches()
-    return render_template('funny.html',title = title, pitch = pitch)
+# @main.route('/funny/pitch/')
+# def funny():
+#     '''
+#     View root page function that returns the funny page and its data
+#     '''
 
-@main.route('/life/pitch/')
-def life():
-    '''
-    View root page function that returns the life page and its data
-    '''
+#     pitch = pitch.get_pitches()
+#     return render_template('funny.html',title = title, pitch = pitch)
 
-    pitch = pitch.get_pitches()
-    return render_template('life.html',title = title, pitch = pitch)
+# @main.route('/life/pitch/')
+# def life():
+#     '''
+#     View root page function that returns the life page and its data
+#     '''
+
+#     pitch = pitch.get_pitches()
+#     return render_template('life.html',title = title, pitch = pitch)
  
 @main.route('/pitch/<int:pitch_id>', methods = ['GET','POST'])
 def pitch(pitch_id):
@@ -53,20 +56,19 @@ def pitch(pitch_id):
 
     return render_template('pitch.html',id = pitch_id, pitch = pitch)    
 
-@main.route('/pitch/pitch/new/<int:id>', methods = ['GET','POST'])
-def new_pitch(id):
+@main.route('/pitch/pitch/new/', methods = ['GET','POST'])
+@login_required
+def new_pitch():
     form = PitchForm()
-    pitch = get_pitch(id)
 
     if form.validate_on_submit():
-        title = form.title.data
-        pitch = form.pitch.data
-        new_pitch = Pitch(pitch.id,pitch)
-        new_pitch.save_pitch()
-        return redirect(url_for('pitch',id = pitch.id ))
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+        # return redirect(url_for('pitch',id = pitch.id ))
 
-    title = f'{pitch.title} pitch'
-    return render_template('new_pitch.html',title = title, pitch_form=form, pitch=pitch)
+    return render_template('new_pitch.html',title = 'new pitch', pitch_form=form, pitch=pitch)
 
 @main.route('/user/<uname>')
 def profile(uname):

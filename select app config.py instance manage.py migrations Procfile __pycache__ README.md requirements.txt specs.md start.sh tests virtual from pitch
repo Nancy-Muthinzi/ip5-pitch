@@ -1,0 +1,8 @@
+                 List of relations
+ Schema |      Name       | Type  |      Owner      
+--------+-----------------+-------+-----------------
+ public | alembic_version | table | moringa-student
+ public | pitch           | table | moringa-student
+ public | users           | table | moringa-student
+(3 rows)
+

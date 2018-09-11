@@ -16,10 +16,23 @@
 <div class="container-fluid">
 
 <div class="jumbotron">
-    <p>If I won the award for laziness, I would send somebody to pick it up for me.</p>
+    <p>If a book about failures doesn’t sell, is it a success?</p>
 </div>
-
-
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    {% for tech in technology %}
+    <ul>{{tech.content}}</ul>
+    {% endfor %}
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+    {% for pitch in funny %}
+    <ul>{{pitch.username}}</ul>
+    <ul>{{pitch.content}}</ul>
+    {% endfor %}
+</div>
+<div class="col-md-4"></div>
 
 </div>
 {% endblock %}
