@@ -15,10 +15,9 @@ With this application, a user can:
 
 
 ## SETUP/INSTALLATION REQUIREMENTS
-To be able to view or use the application, here's the link to a live site that is deployed on Github pages: https://nancy-muthinzi.github.io/ip5-pitches/
+To be able to view or use the application, here's the github https://nancy-muthinzi.github.io/ip5-pitches/.
 
-To export the application,
-
+You need to clone the repository and install all the dependencies required before being able to launch the app on your computer.
 
 ## KNOWN BUGS
 This is still a work in progress and will continue to be worked on. But for any issues encountered and any contributions to the code or design, kindly reach out to me on my email address: nanciekathini@gmail.com.
