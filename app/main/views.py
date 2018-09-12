@@ -1,10 +1,12 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from .forms import UpdateProfile,PitchForm
-# from .forms import PitchForm
+# from .forms import PitchForm, CommentForm
 from flask_login import login_required,current_user
-from ..models import Pitch, User
+from ..models import Pitch, User, Comment
 from .. import db, photos
+
+import markdown2  
 
 # Views
 @main.route('/')
@@ -14,47 +16,23 @@ def index():
     View root page function that returns the index page and its data
     '''
 
-    title = 'PITCH PERFECT!'
-    technology = Pitch.query.filter_by(category='technology')
+    title = 'PERFECT PITCH!'
+    tech = Pitch.query.filter_by(category='tech')
     funny = Pitch.query.filter_by(category='funny')
+    life = Pitch.query.filter_by(category='life')
 
-    return render_template('index.html',title = title,technology=technology,funny=funny)
+    return render_template('index.html',title = title,tech=tech,funny=funny,life=life)
 
-# @main.route('/encouraging/pitch/')
-# def encouraging():
+
+# @main.route('/pitch', methods = ['GET','POST'])
+# def pitch():
+
 #     '''
-#     View root page function that returns the encouraging page and its data
-#     '''
-
-#     pitch = Pitch.query.filter_by(category='encouraging')
-#     return render_template('encouraging.html',title = title, pitch = pitch)
-
-# @main.route('/funny/pitch/')
-# def funny():
-#     '''
-#     View root page function that returns the funny page and its data
+#     View pitch page function that returns the pitch details page and its data
 #     '''
 
-#     pitch = pitch.get_pitches()
-#     return render_template('funny.html',title = title, pitch = pitch)
+#     return render_template('pitch.html', pitch = pitch)    
 
-# @main.route('/life/pitch/')
-# def life():
-#     '''
-#     View root page function that returns the life page and its data
-#     '''
-
-#     pitch = pitch.get_pitches()
-#     return render_template('life.html',title = title, pitch = pitch)
- 
-@main.route('/pitch/<int:pitch_id>', methods = ['GET','POST'])
-def pitch(pitch_id):
-
-    '''
-    View pitch page function that returns the pitch details page and its data
-    '''
-
-    return render_template('pitch.html',id = pitch_id, pitch = pitch)    
 
 @main.route('/pitch/pitch/new/', methods = ['GET','POST'])
 @login_required
@@ -66,9 +44,9 @@ def new_pitch():
         new_pitch = Pitch(category=form.category.data,content=form.content.data)
         db.session.add(new_pitch)
         db.session.commit()
-        # return redirect(url_for('pitch',id = pitch.id ))
 
     return render_template('new_pitch.html',title = 'new pitch', pitch_form=form, pitch=pitch)
+
 
 @main.route('/user/<uname>')
 def profile(uname):

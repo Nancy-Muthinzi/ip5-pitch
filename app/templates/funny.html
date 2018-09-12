@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% for pitch in funny %}
+
+<div>
+<p>{{funny.category}}</p>
+<p>{{funny.date_posted}}</p>
+</div>
+
+{% endfor %}
+{% endblock %}

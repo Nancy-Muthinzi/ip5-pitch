@@ -2,7 +2,6 @@
 <!-- {% import 'macros.html' as macro%} -->
 
 <!-- Styles block -->
-
 {% block styles%}
     {{ super() }}
     <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
@@ -13,28 +12,51 @@
 
 <!-- Content block -->
 {% block content %}
+<body style="background-image: url('static/images/yellow.jpg')">
 <div class="container-fluid">
 
 <div class="jumbotron">
     <p>If a book about failures doesn’t sell, is it a success?</p>
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4">
-    {% for tech in technology %}
-    <ul>{{tech.content}}</ul>
+
+<div>
+    <h3>PITCHES!!!</h3>
+    {% for pitch in pitch %}
+    <p><{{pitch.pitch}}/p>
     {% endfor %}
 </div>
-<div class="col-md-4"></div>
-<div class="col-md-4"></div>
+
+<div class="row">
 <div class="col-md-4">
+    <h4>Tech Pitches</h4>
+    {% for pitch in tech %}
+    <p>{{tech.content}}</p>
+    <p>{{pitch.date_posted}}</p>
+   
+    {% endfor %}
+</div>
+
+<div class="col-md-4">
+    <h4>Life Pitches</h4>
+    {% for pitch in life %}
+    <p>{{life.content}}</p>
+    <p>{{pitch.date_posted}}</p>
+   
+    {% endfor %}
+</div>
+
+<div class="col-md-4">
+    <h4>Funny Pitches</h4>
     {% for pitch in funny %}
-    <ul>{{pitch.username}}</ul>
-    <ul>{{pitch.content}}</ul>
+    <p>{{funny.content}}</p>
+    <p>{{pitch.date_posted}}</p>
+    
     {% endfor %}
 </div>
-<div class="col-md-4"></div>
 
 </div>
+</div>
+</body>
 {% endblock %}
 
 </html>

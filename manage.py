@@ -26,7 +26,7 @@ def test():
 
 @manager.shell
 def make_shell_context():
-    return dict(app = app, db = db, user = User, role = Role, pitch = Pitch, category = Category, comment = Comment)    
+    return dict(app = app, db = db, user = User, pitch = Pitch)    
 
 if __name__ == '__main__':
     manager.run()

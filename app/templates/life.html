@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% for pitch in life %}
+
+<div>
+<p>{{life.category}}</p>
+<p>{{life.date_posted}}</p>
+</div>
+
+{% endfor %}
+{% endblock %}
