@@ -24,16 +24,62 @@ def index():
     return render_template('index.html',title = title,tech=tech,funny=funny,life=life)
 
 
-# @main.route('/pitch', methods = ['GET','POST'])
-# def pitch():
+@main.route('/life', methods = ['GET','POST'])
+def pitch():
 
-#     '''
-#     View pitch page function that returns the pitch details page and its data
-#     '''
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
 
-#     return render_template('pitch.html', pitch = pitch)    
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    life = Pitch.query.filter_by(category='life')
+
+    return render_template('life.html',title = 'life',life=life,form=form)
+  
+
+@main.route('/funny', methods = ['GET','POST'])
+def funny():
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
+
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    funny = Pitch.query.filter_by(category='funny')
+
+    return render_template('funny.html',title = 'life',funny=funny,form=form)
 
 
+@main.route('/tech', methods = ['GET','POST'])
+def tech():
+
+    '''
+    View pitch page function that returns the pitch details page and its data
+    '''
+    form = PitchForm()
+
+    if form.validate_on_submit():
+        
+        new_pitch = Pitch(category=form.category.data,content=form.content.data)
+        db.session.add(new_pitch)
+        db.session.commit()
+
+    tech = Pitch.query.filter_by(category='tech')
+
+    return render_template('tech.html',title = 'life',tech=tech,form=form)
+  
 @main.route('/pitch/pitch/new/', methods = ['GET','POST'])
 @login_required
 def new_pitch():

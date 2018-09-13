@@ -1,12 +1,14 @@
 {% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
 {% for pitch in tech %}
 
 <div>
-<p>{{tech.category}}</p>
-<p>{{tech.date_posted}}</p>
+<p>{{pitch.category}}</p>
+<p>{{pitch.date_posted}}</p>
 </div>
-
 {% endfor %}
+{{ wtf.quick_form(form)}}
+
 {% endblock %}

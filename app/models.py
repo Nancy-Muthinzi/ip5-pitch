@@ -9,12 +9,12 @@ class User(UserMixin, db.Model):
 
     __tablename__ = 'users'
     id =db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(144), index=True, unique = True)
-    email = db.Column(db.String(144), index=True, unique=True)
-    password_hash = db.Column(db.String(144))
+    username = db.Column(db.String(255), index=True, unique = True)
+    email = db.Column(db.String(255), index=True, unique=True)
+    password_hash = db.Column(db.String(255))
     pitch = db.relationship('Pitch', backref='author', lazy='dynamic')
-    bio = db.Column(db.String(144))
-    profile_pic = db.Column(db.String(144))
+    bio = db.Column(db.String(255))
+    profile_pic = db.Column(db.String(255))
 
     @property
     def password(self):
@@ -44,8 +44,8 @@ class Pitch(db.Model):
     __tablename__ = 'pitch'
 
     id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.String(144))
-    category = db.Column(db.String(144))
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
