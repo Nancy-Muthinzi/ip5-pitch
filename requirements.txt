@@ -68,7 +68,7 @@ pycurl==7.43.0.1
 pydocstyle==2.1.1
 pyflakes==2.0.0
 pygobject==3.26.1
-PyJWT==1.5.3
+PyJWT==2.4.0
 pylama==7.4.3
 pylama-pylint==3.0.1
 pylint==2.1.1
